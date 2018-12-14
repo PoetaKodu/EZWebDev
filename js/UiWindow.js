@@ -1,0 +1,6 @@
+class UiWindow
+{
+	render(ctx)
+	{
+	}
+}

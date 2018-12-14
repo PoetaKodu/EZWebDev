@@ -14,7 +14,7 @@ class TreeViewElement
 	}
 }
 
-class TreeView
+class TreeView extends UiWindow
 {
 	constructor(srcNode)
 	{
@@ -24,11 +24,11 @@ class TreeView
 
 	generate() {
 		let v = document.createElement("div");
-		this.populate(v, this.rootNode);
+		this.render(v, this.rootNode);
 		return v;
 	}
 
-	populate(start, root)
+	render(start, root)
 	{
 		if (root == undefined)
 			root = this.rootNode;
@@ -43,7 +43,7 @@ class TreeView
 				ul.appendChild(li);
 				let text = document.createTextNode(e.tag);
 				li.appendChild(text);
-				this.populate(li, e);
+				this.render(li, e);
 			}
 		}
 	}

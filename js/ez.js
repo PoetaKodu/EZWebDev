@@ -11,6 +11,6 @@ class EzApp
 	}
 	run() {
 		this.treeView.generateTreeElements();
-		this.treeView.populate(this.treeViewCtx);
+		this.treeView.render(this.treeViewCtx);
 	}
 }
