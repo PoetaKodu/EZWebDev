@@ -30,7 +30,7 @@ body {
   margin: 0px 10px;
   min-height: 200px;
 }
-#ezSrcCtx {
+#ezOutputCtx {
   width: 60%;
   margin: 0 auto;
   background-color: #fff;

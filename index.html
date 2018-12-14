@@ -14,6 +14,9 @@
 	<script src="js/PropertyEvaluator.js"></script>
 	<script src="js/StylePropertyEvaluator.js"></script>
 	<script src="js/AttributePropertyEvaluator.js"></script>
+	<script src="js/NodeInserter.js"></script>
+	<script src="js/DocumentNode.js"></script>
+	<script src="js/DocumentTree.js"></script>
 
 	<script src="js/GlobalConfig.js"></script>
 	<script src="scheme/Presets.js"></script>
@@ -28,23 +31,25 @@
 <body>
 	<div id="container">
 		<div id="ezTreeCtx" class="ez-window"></div>
-		<div id="ezSrcCtx" class="ez-panel">
-			<div ez>
-				<section ez>
-					<p ez>Tak</p>
-				</section>
-			</div>
-		</div>
+		<div id="ezOutputCtx" class="ez-panel"></div>
 		<div id="ezPropertiesCtx" class="ez-window"></div>
 	</div>
 
 	<script>
 		let ezTreeCtx = document.getElementById("ezTreeCtx");
 		let ezPropertiesCtx = document.getElementById("ezPropertiesCtx");
-		let ezSrcCtx = document.getElementById("ezSrcCtx");
+		let ezOutputCtx = document.getElementById("ezOutputCtx");
 
-		let ez = new EzApp(ezSrcCtx, ezTreeCtx, ezPropertiesCtx);
+		let ez = new EzApp(
+				ezOutputCtx,
+				ezTreeCtx,
+				ezPropertiesCtx
+			);
 		ez.run();
+		let div = ez.documentTree.insert("div");
+		let div2 = ez.documentTree.insert("div", div);
+		let p = ez.documentTree.insert("p", div2);
+		ez.documentTree.rebuild();
 	</script>
 </body>
 </html>
