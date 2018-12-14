@@ -18,7 +18,7 @@ class TreeView
 {
 	constructor(srcNode)
 	{
-		this.srcNode = rootNode;
+		this.srcNode = srcNode;
 		this.rootNode = new TreeViewElement("body", null);
 	}
 
