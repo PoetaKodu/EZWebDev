@@ -6,6 +6,16 @@ let ValueType = {
 	Predefined: 4
 };
 
+let EditorType = {
+	Raw: 0,
+	Text: 1,
+	Number: 2,
+	InputNumber: 3,
+	Slider: 4,
+	Predefined: 5,
+	List: 6
+};
+
 class PropertyEditor {
 	constructor(scheme) {
 		this.scheme = scheme;
