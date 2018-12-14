@@ -47,7 +47,7 @@ class TreeView extends UiWindow
 				let e = root.children[i];
 				let li = document.createElement("li");
 				ul.appendChild(li);
-				let text = document.createElement("button");
+				let text = document.createElement("p");
 				text.innerHTML = e.tag;
 				li.appendChild(text);
 				

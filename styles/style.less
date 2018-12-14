@@ -1,0 +1,48 @@
+.ez-panel {
+	float: left;
+	box-sizing: border-box;
+	overflow: auto;
+}
+
+.ez-window {
+	.ez-panel();
+	background-color: rgb(40, 40, 40);
+	color: rgb(211, 211, 211);
+	padding: 5px;
+
+	font-family: 'Century Gothic', sans-serif;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+#ezTreeCtx, #ezPropertiesCtx {
+	width: 15%;
+	min-height: 200px;
+}
+#ezSrcCtx {
+	width: 70%;
+}
+
+#ezTreeCtx {
+	li {
+		padding: 5px;
+	}
+	li, li>p {
+		display: block;
+		width: 100%;
+	}
+	li>p {
+		transition: 0.5s;
+		font-size: 70%;
+		padding: 5px 15px;
+		margin: 0;
+		background-color: rgba(255, 255, 255, 0.1);
+		&:hover {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
+	}
+}

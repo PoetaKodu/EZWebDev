@@ -1,0 +1,45 @@
+.ez-panel {
+  float: left;
+  box-sizing: border-box;
+  overflow: auto;
+}
+.ez-window {
+  float: left;
+  box-sizing: border-box;
+  overflow: auto;
+  background-color: #282828;
+  color: #d3d3d3;
+  padding: 5px;
+  font-family: 'Century Gothic', sans-serif;
+}
+.ez-window ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#ezTreeCtx,
+#ezPropertiesCtx {
+  width: 15%;
+  min-height: 200px;
+}
+#ezSrcCtx {
+  width: 70%;
+}
+#ezTreeCtx li {
+  padding: 5px;
+}
+#ezTreeCtx li,
+#ezTreeCtx li > p {
+  display: block;
+  width: 100%;
+}
+#ezTreeCtx li > p {
+  transition: 0.5s;
+  font-size: 70%;
+  padding: 5px 15px;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+#ezTreeCtx li > p:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
