@@ -1,6 +1,16 @@
-let ezTreeView = document.getElementById("ezTreeView");
-let ezViewContext = document.getElementById("ezViewContext");
-
-let treeView = new TreeView(ezViewContext);
-treeView.generateTreeElements();
-treeView.populate(ezTreeView);
+class EzApp
+{
+	constructor(srcCtx, treeViewCtx)
+	{
+		this.srcCtx = srcCtx;
+		this.treeViewCtx = treeViewCtx;
+		this.setup();
+	}
+	setup() {
+		this.treeView = new TreeView(this.srcCtx);
+	}
+	run() {
+		this.treeView.generateTreeElements();
+		this.treeView.populate(this.treeViewCtx);
+	}
+}
