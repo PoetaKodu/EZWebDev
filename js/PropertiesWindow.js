@@ -5,7 +5,7 @@ class PropertyWindowCategory
 	}
 }
 
-class PropertyWindow extends UiWindow
+class PropertiesWindow extends UiWindow
 {
 	constructor(element) {
 		
