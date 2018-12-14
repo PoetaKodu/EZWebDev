@@ -7,8 +7,10 @@ class PropertyWindowCategory
 
 class PropertyWindow extends UiWindow
 {
-	render(ctx)
-	{
+	constructor(element) {
+		
+	}
+	render(ctx) {
 
 	}
 }
