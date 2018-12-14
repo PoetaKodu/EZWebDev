@@ -71,8 +71,9 @@ class SliderPropertyEditor
 		let slider = document.createElement("input");
 		e.appendChild(slider);
 		slider.setAttribute("type", "range");
-		slider.setAttribute("min", this.scheme.minValue);
-		slider.setAttribute("max", this.scheme.maxValue);
+		slider.setAttribute("min", this.scheme.min);
+		slider.setAttribute("max", this.scheme.max);
+		slider.setAttribute("step", this.scheme.step);
 
 		let valueIndicator = document.createElement("p");
 		slider.addEventListener("change",

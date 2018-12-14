@@ -17,10 +17,14 @@ globalConfig.tagSchemes = {
 			{
 				name: "Border",
 				properties: [
-					{ 
-						name: "BorderStyle",
-						editorPreset: "border"
-					}
+					{ name: "Style", editorPreset: "border" }
+				]
+			},
+			{
+				name: "Font",
+				properties: [
+					{ name: "Weight", editorPreset: "fontWeight" },
+					{ name: "Family", editorPreset: "fontFamily" }
 				]
 			}
 		]
