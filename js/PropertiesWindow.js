@@ -13,7 +13,7 @@ class PropertiesWindow extends UiWindow
 		this.currentConfig = currentConfig;
 		this.scheme = scheme;
 		this.importScheme();
-		this.importValues();
+		// TODO: //this.importValues();
 	}
 
 	render(ctx)
@@ -24,7 +24,6 @@ class PropertiesWindow extends UiWindow
 			for (let i = 0; i < this.scheme.categories; i++)
 			{
 				let cat = this.scheme.categories[i];
-
 
 				let li = document.createElement("li");
 				ul.appendChild(li);
@@ -63,7 +62,19 @@ class PropertiesWindow extends UiWindow
 		}	
 	}
 
-	spawnEditor(prop) {
-		return null;
+	spawnEditor(prop)
+	{	
+		let editorScheme = eval("globalConfig." + prop.editorPreset);
+		switch(editorScheme.type)
+		{
+			case EditorType.Raw: return new RawPropertyEditor(editorScheme);
+			case EditorType.Text: return new TextPropertyEditor(editorScheme);
+			case EditorType.Number: return new NumberPropertyEditor(editorScheme);
+			case EditorType.InputNumber: return new InputNumberPropertyEditor(editorScheme);
+			case EditorType.Slider: return new SliderPropertyEditor(editorScheme);
+			case EditorType.Predefined: return new PredefinedPropertyEditor(editorScheme);
+			case EditorType.List: return new ListPropertyEditor(editorScheme);
+			default: return null;
+		}
 	}
 }
