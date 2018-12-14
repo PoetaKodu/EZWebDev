@@ -9,10 +9,10 @@ class PropertyWindowCategory
 class PropertiesWindow extends UiWindow
 {
 	constructor(element, currentConfig, scheme) {
+		super();
 		this.element = element;
 		this.currentConfig = currentConfig;
 		this.scheme = scheme;
-		this.importScheme();
 		// TODO: //this.importValues();
 	}
 
@@ -21,7 +21,7 @@ class PropertiesWindow extends UiWindow
 		if (this.scheme.categories.length > 0)
 		{
 			let ul = document.createElement("ul");
-			for (let i = 0; i < this.scheme.categories; i++)
+			for (let i = 0; i < this.scheme.categories.length; i++)
 			{
 				let cat = this.scheme.categories[i];
 
@@ -37,7 +37,7 @@ class PropertiesWindow extends UiWindow
 					let propsUl = document.createElement("ul");
 					li.appendChild(propsUl);
 
-					for(let j = 0; j < cat.properties; j++)
+					for(let j = 0; j < cat.properties.length; j++)
 					{
 						let prop = cat.properties[j];
 
@@ -53,8 +53,9 @@ class PropertiesWindow extends UiWindow
 						
 						let editor = this.spawnEditor(prop);
 						// TODO: remove this:
-						if (editor != null)
-							editor.render(editorContainer);
+						console.log("Editor: " + editor);
+						editor.render(editorContainer);
+						
 					}
 				}
 			}
@@ -64,7 +65,7 @@ class PropertiesWindow extends UiWindow
 
 	spawnEditor(prop)
 	{	
-		let editorScheme = eval("globalConfig." + prop.editorPreset);
+		let editorScheme = eval("globalConfig.editors." + prop.editorPreset);
 		switch(editorScheme.type)
 		{
 			case EditorType.Raw: return new RawPropertyEditor(editorScheme);

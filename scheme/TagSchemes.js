@@ -11,5 +11,18 @@ globalConfig.tagSchemes = {
 				]
 			}
 		]
+	},
+	div: {
+		categories: [
+			{
+				name: "Border",
+				properties: [
+					{ 
+						name: "BorderStyle",
+						editorPreset: "border"
+					}
+				]
+			}
+		]
 	}
 }

@@ -24,6 +24,7 @@ class PropertyEditor {
 	render(ctx) {
 		let e = this.renderImpl(ctx);
 		this.applySchemeStyle(e);
+		ctx.appendChild(e);
 		return e;
 	}
 	renderImpl(ctx) {}
@@ -90,12 +91,11 @@ class PredefinedPropertyEditor
 {
 	renderImpl(ctx) {
 		let e = document.createElement("select");
-
-		for(let i = 0; i < this.scheme.options; i++)
+		for(let i = 0; i < this.scheme.options.length; i++)
 		{
 			let opt = this.scheme.options[i];
 			let optNode = document.createElement("option");
-			optNode.innerHTML = opt.content;
+			optNode.innerHTML = opt.name;
 			optNode.setAttribute("value", opt.value);
 			e.appendChild(optNode);
 		}

@@ -18,6 +18,7 @@ class TreeView extends UiWindow
 {
 	constructor(srcNode)
 	{
+		super();
 		this.srcNode = srcNode;
 		this.rootNode = new TreeViewElement("body", null);
 	}
@@ -28,9 +29,14 @@ class TreeView extends UiWindow
 		return v;
 	}
 
-	render(start, root)
+	render(ctx, renderCfg)
 	{
-		if (root == undefined)
+		this.renderImpl(ctx, undefined, renderCfg);
+	}
+
+	renderImpl(start, root, renderCfg)
+	{
+		if (root === undefined)
 			root = this.rootNode;
 		if (root.children.length > 0)
 		{
@@ -41,9 +47,21 @@ class TreeView extends UiWindow
 				let e = root.children[i];
 				let li = document.createElement("li");
 				ul.appendChild(li);
-				let text = document.createTextNode(e.tag);
+				let text = document.createElement("button");
+				text.innerHTML = e.tag;
 				li.appendChild(text);
-				this.render(li, e);
+				
+				if (renderCfg !== undefined)
+				{
+					text.addEventListener("click",
+							function() {
+								console.log("click");
+								renderCfg.clickFn(e);
+							}
+						);
+				}
+				
+				this.renderImpl(li, e);
 			}
 		}
 	}
