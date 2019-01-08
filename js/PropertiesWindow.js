@@ -13,11 +13,13 @@ class PropertiesWindow extends UiWindow
 		this.element = element;
 		this.currentConfig = currentConfig;
 		this.scheme = scheme;
+		this.spawnedEditors = [];
 		// TODO: //this.importValues();
 	}
 
 	render(ctx)
 	{
+		this.spawnedEditors = [];
 		if (this.scheme.categories.length > 0)
 		{
 			let ul = document.createElement("ul");
@@ -65,7 +67,34 @@ class PropertiesWindow extends UiWindow
 		propLi.appendChild(editorContainer);
 		
 		let editor = this.spawnEditor(property);
+		console.log("Editor:");
+		console.log(editor);
+		editor.onValueChanged = (v) => {
+			let found = false;
+			console.log("Ctx:");
+			console.log(this.element);
+			if (this.element.settings === undefined)
+				this.element.settings = [];
+			for(let i = 0; i < this.element.settings.length; ++i) {
+				if (this.element.settings[i].name == property.stylePropertyName)
+				{
+					this.element.settings[i].value = v;
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+				this.element.settings.push({ name: property.stylePropertyName, value: v });
+
+			let evaluator = new StylePropertyEvaluator();
+			console.log("Evaluator: ");
+			console.log(evaluator);
+			let s = evaluator.evaluate(this.element, this.element.settings);
+			console.log("Evaluated style: " + s);
+			this.element.ref.setAttribute("style", s);
+		}
 		editor.render(editorContainer);
+		this.spawnedEditors.push(editor);
 	}
 
 	spawnEditor(prop)

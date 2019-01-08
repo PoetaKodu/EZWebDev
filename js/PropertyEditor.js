@@ -27,9 +27,10 @@ class PropertyEditor {
 		ctx.appendChild(e);
 		return e;
 	}
-	valueChanged(this_, val) {
-		if (this_.onValueChanged != null)
-			this_.onValueChanged(val);
+	valueChanged(val) {
+		console.log("On value changed: " + this.onValueChanged)
+		if (this.onValueChanged != null)
+			this.onValueChanged(val);
 	}
 	renderImpl(ctx) {}
 	applySchemeStyle(rendered) {
@@ -43,11 +44,7 @@ class RawPropertyEditor
 	renderImpl(ctx) {
 		let e = document.createElement("input");
 		e.setAttribute("type", "text");
-		let this_ = this;
-		e.addEventListener("change", function()
-			{
-				this_.valueChanged(e.value);
-			});
+		e.addEventListener("change", () => this.valueChanged(e.value) );
 		return e;
 	}
 }
@@ -67,11 +64,7 @@ class InputNumberPropertyEditor
 	renderImpl(ctx) {
 		let e = document.createElement("input");
 		e.setAttribute("type", "number");
-		let this_ = this;
-		e.addEventListener("change", function()
-			{
-				this_.valueChanged(e.valueAsNumber);
-			});
+		e.addEventListener("change", () => this.valueChanged(e.valueAsNumber) );
 		return e;
 	}
 }
@@ -89,12 +82,11 @@ class SliderPropertyEditor
 		slider.setAttribute("max", this.scheme.max);
 		slider.setAttribute("step", this.scheme.step);
 
-		let this_ = this;
 		let valueIndicator = document.createElement("p");
 		slider.addEventListener("change",
-				function() {
+				() => {
 					valueIndicator.innerHTML = slider.value;
-					this_.valueChanged(slider.valueAsNumber);
+					this.valueChanged(slider.valueAsNumber);
 				}
 			);
 		valueIndicator.className += "ez-slider-value";
@@ -116,10 +108,10 @@ class PredefinedPropertyEditor
 			optNode.setAttribute("value", opt.value);
 			e.appendChild(optNode);
 		}
-		let this_ = this;
 		e.addEventListener("change",
-				function() {
-					this_.valueChanged(e.value);
+				() => {
+					console.log("New value: " + e.value)
+					this.valueChanged(e.value);
 				}
 			);
 		return e;

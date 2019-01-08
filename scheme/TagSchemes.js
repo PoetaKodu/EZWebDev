@@ -4,10 +4,14 @@ globalConfig.tagSchemes = {
 			{
 				name: "Border",
 				properties: [
-					{ 
-						name: "BorderStyle",
-						editorPreset: "border"
-					}
+					{ name: "Style", stylePropertyName: "border-style", editorPreset: "border" },
+				]
+			},
+			{
+				name: "Font",
+				properties: [
+					{ name: "Weight", stylePropertyName: "font-weight", editorPreset: "fontWeight" },
+					{ name: "Family", stylePropertyName: "font-family", editorPreset: "fontFamily" }
 				]
 			}
 		]
@@ -17,7 +21,7 @@ globalConfig.tagSchemes = {
 			{
 				name: "Border",
 				properties: [
-					{ name: "Style", editorPreset: "border" }
+					{ name: "Style", stylePropertyName: "border-style", editorPreset: "border" }
 				]
 			},
 			{

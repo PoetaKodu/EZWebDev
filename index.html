@@ -49,7 +49,9 @@
 		let div = ez.documentTree.insert("div");
 		let div2 = ez.documentTree.insert("div", div);
 		let p = ez.documentTree.insert("p", div2);
+		console.log(p);
 		ez.documentTree.rebuild();
+		p.ref.innerHTML = "Jakis tekst hehehe";
 	</script>
 </body>
 </html>
