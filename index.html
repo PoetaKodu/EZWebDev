@@ -9,12 +9,8 @@
 	<link rel="stylesheet" href="styles/style.css">
 
 	<script src="js/UiWindow.js"></script>
-	<script src="js/NodeProperty.js"></script>
+	<script src="js/PropertyFunctions.js"></script>
 	<script src="js/PropertyEditor.js"></script>
-	<script src="js/PropertyEvaluator.js"></script>
-	<script src="js/StylePropertyEvaluator.js"></script>
-	<script src="js/AttributePropertyEvaluator.js"></script>
-	<script src="js/NodeInserter.js"></script>
 	<script src="js/DocumentNode.js"></script>
 	<script src="js/DocumentTree.js"></script>
 
@@ -24,7 +20,6 @@
 	
 	<script src="js/TreeView.js"></script>
 	<script src="js/PropertiesWindow.js"></script>
-	<script src="js/EzWebDevApp.js"></script>
 
 	<script src="js/ez.js"></script>
 </head>
@@ -49,7 +44,6 @@
 		let div = ez.documentTree.insert("div");
 		let div2 = ez.documentTree.insert("div", div);
 		let p = ez.documentTree.insert("p", div2);
-		console.log(p);
 		ez.documentTree.rebuild();
 		p.ref.innerHTML = "Jakis tekst hehehe";
 	</script>

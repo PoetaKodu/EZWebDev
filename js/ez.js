@@ -11,35 +11,25 @@ class EzApp
 		this.documentTree 			= new DocumentTree(this.outputCtx);
 		this.treeView 				= new TreeView(this.documentTree, this.treeViewCtx);
 
-		let this_ = this;
-		this.treeView.onSelectTreeElement = function(node) { this_.onSelectTreeElement(this_, node) };
+		this.treeView.onSelectTreeElement = (node) => {
+				this.onSelectTreeElement(node)
+			};
 
-		this.propertiesWindow 		= null;
+		this.propertiesWindow = null;
 	}
 
-	onSelectTreeElement(this_, node) {
-		this_.propertiesWindowCtx.innerHTML = "";
-		let defaultScheme = this_.getDefaultTagScheme(node.tag);
+	onSelectTreeElement(node) {
+		this.propertiesWindowCtx.innerHTML = "";
+		let defaultScheme = this.getDefaultTagScheme(node.tag);
 
-		this_.propertiesWindow = new PropertiesWindow(node, node.settings, defaultScheme);
-		this_.propertiesWindow.render(this_.propertiesWindowCtx);
+		this.propertiesWindow = new PropertiesWindow(node, node.settings, defaultScheme);
+		this.propertiesWindow.render(this.propertiesWindowCtx);
 	}
 
 	run () {
 
 	}
-	// run() {
-	// 	this.treeView.generateTreeElements();
 
-	// 	let this_ = this;
-	// 	let renderCfg = {
-	// 			clickFn: function(element) {
-	// 					this_.onSelectElementInTreeView(this_, element);
-	// 				}
-	// 		};
-
-	// 	this.treeView.render(this.treeViewCtx, renderCfg);
-	// }
 	getDefaultTagScheme(tag) {
 		return eval("globalConfig.tagSchemes." + tag);
 	}

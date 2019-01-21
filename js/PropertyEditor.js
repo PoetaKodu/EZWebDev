@@ -28,7 +28,6 @@ class PropertyEditor {
 		return e;
 	}
 	valueChanged(val) {
-		console.log("On value changed: " + this.onValueChanged)
 		if (this.onValueChanged != null)
 			this.onValueChanged(val);
 	}
@@ -110,7 +109,6 @@ class PredefinedPropertyEditor
 		}
 		e.addEventListener("change",
 				() => {
-					console.log("New value: " + e.value)
 					this.valueChanged(e.value);
 				}
 			);

@@ -67,12 +67,9 @@ class PropertiesWindow extends UiWindow
 		propLi.appendChild(editorContainer);
 		
 		let editor = this.spawnEditor(property);
-		console.log("Editor:");
-		console.log(editor);
 		editor.onValueChanged = (v) => {
 			let found = false;
-			console.log("Ctx:");
-			console.log(this.element);
+
 			if (this.element.settings === undefined)
 				this.element.settings = [];
 			for(let i = 0; i < this.element.settings.length; ++i) {
@@ -86,12 +83,7 @@ class PropertiesWindow extends UiWindow
 			if (!found)
 				this.element.settings.push({ name: property.stylePropertyName, value: v });
 
-			let evaluator = new StylePropertyEvaluator();
-			console.log("Evaluator: ");
-			console.log(evaluator);
-			let s = evaluator.evaluate(this.element, this.element.settings);
-			console.log("Evaluated style: " + s);
-			this.element.ref.setAttribute("style", s);
+			applyStyle(this.element.ref, this.element.settings);
 		}
 		editor.render(editorContainer);
 		this.spawnedEditors.push(editor);
