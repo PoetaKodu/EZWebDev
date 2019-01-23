@@ -16,32 +16,50 @@ class TreeView extends UiWindow
 
 	renderImpl(ctx, node)
 	{
-		let text = document.createElement("p");
-		text.innerHTML = node.tag;
-		ctx.appendChild(text);
+		//	<div (ndRowCtr)>
+		//		<p (ndTagName)>Tag</p>
+		//		<div>
+		//			<button>+</button>
+		//			<button>-</button>
+		//			<!-- ... control buttons -->
+		//		</div>
+		//	</div>
+		//	<ul (ndChildren)>
+		//		<li (ndChild)>Child element 1 (recurse)</li>
+		//		<li (ndChild)>Child element 2 (recurse)</li>
+		//		<!-- ... other children -->
+		//	</ul>
 
-		this.addControlButtons(ctx, node);
+		// Setup ndRowCtr - the most outer div.
+		let ndRowCtr = document.createElement("div");
+		ctx.appendChild(ndRowCtr);
 
-		let this_ = this;
-		text.addEventListener("click",
-				function()
-				{
-					if (this_.onSelectTreeElement !== null)
-						this_.onSelectTreeElement(node);
+		// Setup ndTagName - the <p> with tag name.
+		let ndTagName = document.createElement("p");
+		ndTagName.innerHTML = node.tag;
+		ndTagName.addEventListener("click",
+				() => {
+					if (this.onSelectTreeElement !== null)
+						this.onSelectTreeElement(node);
 				}
 			);
+		ndRowCtr.appendChild(ndTagName);
 
+		
+		// Setup control buttons:
+		this.addControlButtons(ndRowCtr, node);
+		
+		// Setup children:
 		if (node.children.length > 0)
 		{
-			let ul = document.createElement("ul");
-			ctx.appendChild(ul);
+			let ndChildren = document.createElement("ul");
+			ctx.appendChild(ndChildren);
 			for(let i = 0; i < node.children.length; i++)
 			{
-				let nodeChild = node.children[i];
-				let li = document.createElement("li");
-				ul.appendChild(li);
+				let ndChild = document.createElement("li");
+				ndChildren.appendChild(ndChild);
 				
-				this.renderImpl(li, nodeChild);
+				this.renderImpl(ndChild, node.children[i]);
 			}
 		}
 	}

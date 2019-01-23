@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="styles/style.css">
 
 	<script src="js/UiWindow.js"></script>
+	<script src="js/ModalWindow.js"></script>
 	<script src="js/PropertyFunctions.js"></script>
 	<script src="js/PropertyEditor.js"></script>
 	<script src="js/DocumentNode.js"></script>
@@ -24,27 +25,76 @@
 	<script src="js/ez.js"></script>
 </head>
 <body>
-	<div id="container">
-		<div id="ezTreeCtx" class="ez-window"></div>
+	<div class="ez-container">
+		<div class="ez-window">
+			<header><h1>Drzewo projektu</h1></header>
+			<div id="ezTreeCtx"></div>
+		</div>
+	
 		<div id="ezOutputCtx" class="ez-panel"></div>
-		<div id="ezPropertiesCtx" class="ez-window"></div>
+	
+		<div class="ez-window">
+			<header><h1>Właściwości</h1></header>
+			<div id="ezPropertiesCtx"></div>
+		</div>
+	
+		<div id="ezInsertElementModalCtx" class="ez-modal-window">
+			<header>
+				<h1>Dodaj element</h1>
+				<div class="ez-modal-buttons">
+					<button class="ez-modal-close-btn">X</button>
+				</div>
+			</header>
+			<main>
+				<p>Wpisz tag elementu:</p>
+				<input list="tagNames">
+				
+				<datalist id="tagNames">
+					<option value="p">p (paragraf)</option>
+					<option value="a">a (odnośnik)</option>
+					<option value="h1">h1 (tekst nagłówka 1)</option>
+					<option value="h2">h2 (tekst nagłówka 2)</option>
+					<option value="h3">h3 (tekst nagłówka 3)</option>
+					<option value="h4">h4 (tekst nagłówka 4)</option>
+					<option value="h5">h5 (tekst nagłówka 5)</option>
+					<option value="h6">h6 (tekst nagłówka 6)</option>
+					<option value="div">div (pudełko)</option>
+					<option value="span">span (fragment tekstu)</option>
+					<option value="header">header (pudełko nagłówka)</option>
+				</datalist>
+			</main>
+		</div>
 	</div>
+	
+		
 
 	<script>
-		let ezTreeCtx = document.getElementById("ezTreeCtx");
-		let ezPropertiesCtx = document.getElementById("ezPropertiesCtx");
-		let ezOutputCtx = document.getElementById("ezOutputCtx");
+		let ezTreeCtx 			= document.getElementById("ezTreeCtx");
+		let ezPropertiesCtx		= document.getElementById("ezPropertiesCtx");
+		let ezOutputCtx 		= document.getElementById("ezOutputCtx");
+		
+		// Modals windows:
+		let ezInsertElementModalCtx = document.getElementById("ezInsertElementModalCtx");
 
-		let ez = new EzApp(
-				ezOutputCtx,
-				ezTreeCtx,
-				ezPropertiesCtx
-			);
+		let ez = new EzApp();
+
+		// Setup contexts:
+		ez.outputCtx 				= ezOutputCtx;
+		ez.treeViewCtx 				= ezTreeCtx;
+		ez.propertiesWindowCtx 		= ezPropertiesCtx;
+
+		// Setup modal windows:
+		ez.insertElementModalCtx 	= ezInsertElementModalCtx;
+
 		ez.run();
-		let div = ez.documentTree.insert("div");
-		let div2 = ez.documentTree.insert("div", div);
-		let p = ez.documentTree.insert("p", div2);
+
+		// Insert some elements:
+		let div 	= ez.documentTree.insert("div");
+		let div2 	= ez.documentTree.insert("div", div);
+		let p 		= ez.documentTree.insert("p", div2);
+
 		ez.documentTree.rebuild();
+
 		p.ref.innerHTML = "Jakis tekst hehehe";
 	</script>
 </body>

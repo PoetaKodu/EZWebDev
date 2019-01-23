@@ -1,12 +1,13 @@
 class EzApp
 {
-	constructor(outputCtx, treeViewCtx, propertiesWindowCtx)
+	constructor()
 	{
-		this.outputCtx 				= outputCtx;
-		this.treeViewCtx 			= treeViewCtx;
-		this.propertiesWindowCtx 	= propertiesWindowCtx;
+	}
+
+	run() {
 		this.setup();
 	}
+
 	setup() {
 		this.documentTree 			= new DocumentTree(this.outputCtx);
 		this.treeView 				= new TreeView(this.documentTree, this.treeViewCtx);
@@ -14,6 +15,14 @@ class EzApp
 		this.treeView.onSelectTreeElement = (node) => {
 				this.onSelectTreeElement(node)
 			};
+
+		this.insertElementModal = new ModalWindow(this.insertElementModalCtx);
+		let ieFlags = new ModalWindowFlags();
+		// ieFlags.hideTitle 		= true;
+		// ieFlags.hideCloseBtn 	= true;
+		ieFlags.hideOnFocusLost = true;
+		this.insertElementModal.setFlags(ieFlags);
+		this.insertElementModal.setVisible(true);
 
 		this.propertiesWindow = null;
 	}
@@ -24,10 +33,6 @@ class EzApp
 
 		this.propertiesWindow = new PropertiesWindow(node, node.settings, defaultScheme);
 		this.propertiesWindow.render(this.propertiesWindowCtx);
-	}
-
-	run () {
-
 	}
 
 	getDefaultTagScheme(tag) {

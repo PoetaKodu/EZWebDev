@@ -1,55 +1,243 @@
+html {
+  height: 100%;
+}
 body {
-  background-color: #1e1e1e;
-}
-#container {
-  margin: 0 auto;
-  overflow: auto;
-}
-.ez-panel {
-  float: left;
-  box-sizing: border-box;
-  overflow: auto;
-}
-.ez-window {
-  float: left;
-  box-sizing: border-box;
-  overflow: auto;
-  background-color: #282828;
-  color: #d3d3d3;
-  padding: 5px;
-  font-family: 'Century Gothic', sans-serif;
-}
-.ez-window ul {
-  list-style: none;
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
-#ezTreeCtx,
-#ezPropertiesCtx {
-  width: 15%;
-  margin: 0px 10px;
-  min-height: 200px;
+.ez-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  height: 100%;
 }
-#ezOutputCtx {
-  width: 60%;
-  margin: 0 auto;
-  background-color: #fff;
+.ez-panel {
+  height: 100%;
+  overflow-y: auto;
 }
-#ezTreeCtx li {
+.ez-window {
+  height: 100%;
+  overflow-y: auto;
+  color: #f3f3f3;
+  font-family: "Century Gothic", sans-serif;
+  background-color: #282828;
+  border: 1px solid #353535;
+}
+.ez-window > header {
+  width: 100%;
+  overflow: hidden;
+  background-color: #424242;
+}
+.ez-window > header > h1 {
+  margin: 0;
+  padding: 10px 10px;
+  font-size: 90%;
+  line-height: 100%;
+  font-variant: small-caps;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ez-modal-window {
+  height: 100%;
+  overflow-y: auto;
+  color: #f3f3f3;
+  font-family: "Century Gothic", sans-serif;
+  background-color: #282828;
+  border: 1px solid #353535;
+  z-index: 1;
+  position: absolute;
+}
+.ez-modal-window > header {
+  width: 100%;
+  overflow: hidden;
+  background-color: #424242;
+}
+.ez-modal-window > header > h1 {
+  margin: 0;
+  padding: 10px 10px;
+  font-size: 90%;
+  line-height: 100%;
+  font-variant: small-caps;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ez-modal-window > header {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+.ez-modal-window > header > h1 {
+  float: left;
+}
+.ez-modal-window > header > .ez-modal-buttons {
+  height: 100%;
+}
+.ez-modal-window > header > .ez-modal-buttons button {
+  float: right;
+  height: 100%;
+  min-width: 60px;
+}
+.ez-modal-buttons button {
+  background-color: transparent;
+  border: none;
+  transition: 0.1s;
+}
+.ez-modal-buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+#ezInsertElementModalCtx {
+  top: 25%;
+  left: 25%;
+  height: auto;
+  border: 2px solid #00ccff;
+}
+#ezInsertElementModalCtx > main {
   padding: 5px;
 }
-#ezTreeCtx li,
-#ezTreeCtx li > p {
-  display: block;
+#ezInsertElementModalCtx > main > p {
+  margin: 5px;
+}
+#ezInsertElementModalCtx > main > input,
+#ezInsertElementModalCtx > main > select {
+  width: 300px;
+  box-sizing: border-box;
+  font-family: "Consolas", monospace;
+  font-size: 18px;
+  background-color: #f7f7f7;
+  padding: 5px;
+  border: none;
+  border-bottom: 4px solid #b7b7b7;
+}
+#ezTreeCtx {
+  margin: 5px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+#ezTreeCtx .tree-view-node-ctr > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   width: 100%;
+  box-sizing: border-box;
+  border-left: 5px solid rgba(11, 151, 194, 0.815);
+  background-color: rgba(56, 253, 220, 0.05);
 }
-#ezTreeCtx li > p {
-  transition: 0.5s;
-  font-size: 70%;
-  padding: 5px 15px;
+#ezTreeCtx .tree-view-node-ctr > div > p {
+  flex: 1;
   margin: 0;
-  background-color: rgba(255, 255, 255, 0.1);
+  font-family: "Consolas", monospace;
+  padding-left: 10px;
+  transition: 0.2s;
 }
-#ezTreeCtx li > p:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+#ezTreeCtx .tree-view-node-ctr > div > div {
+  visibility: hidden;
+}
+#ezTreeCtx .tree-view-node-ctr > div > div > button {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 25px;
+}
+#ezTreeCtx .tree-view-node-ctr > div > div > button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+#ezTreeCtx .tree-view-node-ctr > div:hover {
+  background-color: rgba(56, 253, 220, 0.15);
+}
+#ezTreeCtx .tree-view-node-ctr > div:hover > p {
+  padding-left: 12px;
+}
+#ezTreeCtx .tree-view-node-ctr > div:hover > div {
+  visibility: visible;
+}
+#ezTreeCtx .tree-view-node-ctr > div:active {
+  background-color: rgba(56, 253, 220, 0.2);
+}
+#ezTreeCtx > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  border-left: 5px solid rgba(11, 151, 194, 0.815);
+  background-color: rgba(56, 253, 220, 0.05);
+}
+#ezTreeCtx > div > p {
+  flex: 1;
+  margin: 0;
+  font-family: "Consolas", monospace;
+  padding-left: 10px;
+  transition: 0.2s;
+}
+#ezTreeCtx > div > div {
+  visibility: hidden;
+}
+#ezTreeCtx > div > div > button {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 25px;
+}
+#ezTreeCtx > div > div > button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+#ezTreeCtx > div:hover {
+  background-color: rgba(56, 253, 220, 0.15);
+}
+#ezTreeCtx > div:hover > p {
+  padding-left: 12px;
+}
+#ezTreeCtx > div:hover > div {
+  visibility: visible;
+}
+#ezTreeCtx > div:active {
+  background-color: rgba(56, 253, 220, 0.2);
+}
+#ezTreeCtx ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 10px;
+}
+#ezTreeCtx ul li > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  border-left: 5px solid rgba(11, 151, 194, 0.815);
+  background-color: rgba(56, 253, 220, 0.05);
+}
+#ezTreeCtx ul li > div > p {
+  flex: 1;
+  margin: 0;
+  font-family: "Consolas", monospace;
+  padding-left: 10px;
+  transition: 0.2s;
+}
+#ezTreeCtx ul li > div > div {
+  visibility: hidden;
+}
+#ezTreeCtx ul li > div > div > button {
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 25px;
+}
+#ezTreeCtx ul li > div > div > button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+#ezTreeCtx ul li > div:hover {
+  background-color: rgba(56, 253, 220, 0.15);
+}
+#ezTreeCtx ul li > div:hover > p {
+  padding-left: 12px;
+}
+#ezTreeCtx ul li > div:hover > div {
+  visibility: visible;
+}
+#ezTreeCtx ul li > div:active {
+  background-color: rgba(56, 253, 220, 0.2);
 }
