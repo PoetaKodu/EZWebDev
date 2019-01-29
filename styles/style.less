@@ -110,7 +110,7 @@ body {
 }
 
 .ez-template {
-	//display: none;
+	display: none;
 }
 
 #ezInsertElementModalCtx {
@@ -125,6 +125,9 @@ body {
 		padding: 5px;
 		>.ez-element-cards-ctr {
 			display: grid;
+			max-height: 300px;
+			overflow-y: auto;
+			box-sizing: border-box;
 			grid-template-columns: repeat(4, 1fr);
 			grid-gap: 5px;
 			justify-items: center;
@@ -181,6 +184,26 @@ body {
 	}
 }
 
+#ezEditContentModalCtx {
+	top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+	height: auto;
+	border: 2px solid rgb(0, 204, 255);
+	overflow: visible;
+	>main{
+		display: flex;
+		flex-wrap: wrap;
+		padding: 5px;
+		>textarea {
+			min-width: 200px;
+			min-height: 50px;
+			flex-basis: 100%;
+		}
+	}
+}
+
 #ezTreeCtx {
 	.tree-view-node-ctr {
 		
@@ -193,6 +216,7 @@ body {
 			box-sizing: border-box;
 			border-left: 5px solid rgba(11, 151, 194, 0.815);
 			background-color: rgba(56, 253, 220, 0.05);
+			cursor: pointer;
 			>p {
 				flex: 1;
 				margin: 0;

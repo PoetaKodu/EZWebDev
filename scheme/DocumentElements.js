@@ -1,6 +1,7 @@
 globalConfig.documentElements = [
 	{
 		name: "Tekst",
+		value: "text",
 		desc: "Czysty tekst, bez tagu",
 		keywords: [ "text", "txt" ]
 	},	

@@ -25,6 +25,7 @@
 	<script src="js/PropertiesWindow.js"></script>
 
 	<script src="js/windows/InsertElementModal.js"></script>
+	<script src="js/windows/EditContentModal.js"></script>
 
 	<script src="js/ez.js"></script>
 </head>
@@ -53,38 +54,26 @@
 				<p>Wyszukaj:</p>
 				<input list="tagNames" class="ez-search-box">
 
-				<div class="ez-element-cards-ctr">
-					<div class="ez-element-card ez-template">
-						<h1>&lt;span&gt;</h1>
-						<p>Wydzielony kontener dla tekstu</p>
-					</div>
-					<div class="ez-element-card ez-template">
-						<h1>&lt;span&gt;</h1>
-						<p>Wydzielony kontener dla tekstu</p>
-					</div>
-					<div class="ez-element-card ez-template">
-						<h1>&lt;span&gt;</h1>
-						<p>Wydzielony kontener dla tekstu</p>
-					</div>
-					<div class="ez-element-card ez-template">
-						<h1>&lt;span&gt;</h1>
-						<p>Wydzielony kontener dla tekstu</p>
-					</div>
+				<div class="ez-element-card ez-template">
+					<h1>&lt;span&gt;</h1>
+					<p>Wydzielony kontener dla tekstu</p>
 				</div>
-				
-				<!-- <datalist id="tagNames">
-					<option value="p">p (paragraf)</option>
-					<option value="a">a (odnośnik)</option>
-					<option value="h1">h1 (tekst nagłówka 1)</option>
-					<option value="h2">h2 (tekst nagłówka 2)</option>
-					<option value="h3">h3 (tekst nagłówka 3)</option>
-					<option value="h4">h4 (tekst nagłówka 4)</option>
-					<option value="h5">h5 (tekst nagłówka 5)</option>
-					<option value="h6">h6 (tekst nagłówka 6)</option>
-					<option value="div">div (pudełko)</option>
-					<option value="span">span (fragment tekstu)</option>
-					<option value="header">header (pudełko nagłówka)</option>
-				</datalist> -->
+				<div class="ez-element-cards-ctr">
+					
+				</div>
+			</main>
+		</div>
+		<div id="ezEditContentModalCtx" class="ez-modal-window">
+			<header>
+				<h1>Edytuj zawartość</h1>
+				<div class="ez-modal-buttons">
+					<button class="ez-modal-close-btn">X</button>
+				</div>
+			</header>
+			<main>
+				<textarea class="ez-edit-content"></textarea>
+				<button class="ez-cancel-btn">Anuluj</button>
+				<button class="ez-accept-btn">Zatwierdź</button>
 			</main>
 		</div>
 	</div>
@@ -98,6 +87,7 @@
 		
 		// Modals windows:
 		let ezInsertElementModalCtx = document.getElementById("ezInsertElementModalCtx");
+		let ezEditContentModalCtx 	= document.getElementById("ezEditContentModalCtx");
 
 		let ez = new EzApp();
 
@@ -108,6 +98,7 @@
 
 		// Setup modal windows:
 		ez.insertElementModalCtx 	= ezInsertElementModalCtx;
+		ez.editContentModalCtx 		= ezEditContentModalCtx;
 
 		ez.run();
 
@@ -118,7 +109,7 @@
 		
 		let text	= ez.documentTree.insertText(p, "Jakiś tekst hehehe<br>");
 		let ul		= ez.documentTree.insert("ul", p);
-		for(let i = 0; i < 150; ++i)
+		for(let i = 0; i < 3; ++i)
 		{
 			let li = ez.documentTree.insert("li", ul);
 			ez.documentTree.insertText(li, "Element listy ddddddddddddddd #" + i);

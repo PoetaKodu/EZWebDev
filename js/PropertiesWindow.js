@@ -20,35 +20,34 @@ class PropertiesWindow extends UiWindow
 	render(ctx)
 	{
 		this.spawnedEditors = [];
-		if (this.scheme.categories.length > 0)
+		let categories = [];
+
+		let ul = document.createElement("ul");
+		ctx.appendChild(ul);
+		for (let i = 0; i < this.scheme.styleProperties.length; i++)
 		{
-			let ul = document.createElement("ul");
-			ctx.appendChild(ul);
-			for (let i = 0; i < this.scheme.categories.length; i++)
+			let groupName = getStyleGroupName(this.scheme.styleProperties[i].group);
+			let group = categories.find(e => e.name == groupName);
+
+			if (!group)
 			{
-				this.renderCategory(ul, this.scheme.categories[i]);
+				group = {};
+				group.name = groupName;
+				group.ref = document.createElement("li");
+				
+				let groupNameNode = document.createElement("h3");
+				groupNameNode.innerHTML = groupName;
+				group.ref.appendChild(groupNameNode);
+
+				ctx.appendChild(group.ref);
+
+				group.childrenList = document.createElement("ul");
+				group.ref.appendChild(group.childrenList);
+
+				categories.push(group);
 			}
-		}	
-	}
 
-	renderCategory(ctx, category)
-	{
-		let li = document.createElement("li");
-		ctx.appendChild(li);
-
-		let header = document.createElement("h3");
-		header.innerHTML = category.name;
-		li.appendChild(header);
-	
-		if (category.properties.length > 0)
-		{
-			let propsUl = document.createElement("ul");
-			li.appendChild(propsUl);
-
-			for(let j = 0; j < category.properties.length; j++)
-			{
-				this.renderProperty(propsUl, category.properties[j]);
-			}
+			this.renderProperty(group.childrenList, this.scheme.styleProperties[i]);
 		}
 	}
 
@@ -73,7 +72,7 @@ class PropertiesWindow extends UiWindow
 			if (this.element.settings === undefined)
 				this.element.settings = [];
 			for(let i = 0; i < this.element.settings.length; ++i) {
-				if (this.element.settings[i].name == property.stylePropertyName)
+				if (this.element.settings[i].name == property.styleName)
 				{
 					this.element.settings[i].value = v;
 					found = true;
@@ -81,7 +80,7 @@ class PropertiesWindow extends UiWindow
 				}
 			}
 			if (!found)
-				this.element.settings.push({ name: property.stylePropertyName, value: v });
+				this.element.settings.push({ name: property.styleName, value: v });
 
 			applyStyle(this.element.ref, this.element.settings);
 		}
@@ -91,7 +90,7 @@ class PropertiesWindow extends UiWindow
 
 	spawnEditor(prop)
 	{	
-		let editorScheme = eval("globalConfig.editors." + prop.editorPreset);
+		let editorScheme = prop;
 		switch(editorScheme.type)
 		{
 			case EditorType.Raw: 			return new RawPropertyEditor(editorScheme);
