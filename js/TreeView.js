@@ -4,9 +4,12 @@ class TreeView extends UiWindow
 		super();
 		this.context = ctx;
 		this.documentTree = documentTree;
-		this.onSelectTreeElement = null;
-		let this_ = this;
-		this.documentTree.onRebuildNeeded = function() { this_.render(); };
+		this.documentTree.onRebuildNeeded = () => { this.render(); };
+
+		// Callbacks:
+		this.onSelectTreeElement 			= null;
+		this.onWantsToInsertNewTreeElement 	= null;
+		this.onWantsToRemoveTreeElement 	= null;
 	}
 
 	render() {
@@ -37,6 +40,12 @@ class TreeView extends UiWindow
 		// Setup ndTagName - the <p> with tag name.
 		let ndTagName = document.createElement("p");
 		ndTagName.innerHTML = node.tag;
+		if (node.isTextNode()) {
+			let textNodeContent = document.createElement("span");
+			textNodeContent.setAttribute("class", "ez-node-meta");
+			textNodeContent.innerHTML = stripHTML(node.text);
+			ndTagName.appendChild(textNodeContent);
+		}
 		ndTagName.addEventListener("click",
 				() => {
 					if (this.onSelectTreeElement !== null)
@@ -66,20 +75,18 @@ class TreeView extends UiWindow
 
 	addControlButtons(treeViewElement, node)
 	{
-		let this_ = this;
-
 		let ctrlsCnt = document.createElement("div");
 		treeViewElement.appendChild(ctrlsCnt);
 
+		if (node.isTagNode())
 		{
 			let btn = document.createElement("button");
 			ctrlsCnt.appendChild(btn);
 			btn.innerHTML = "+";
 			btn.addEventListener("click",
-					function()
-					{
-						this_.documentTree.insert("div", node);
-						this_.documentTree.rebuild();
+					() => {
+						if(this.onWantsToInsertNewTreeElement)
+							this.onWantsToInsertNewTreeElement(node);
 					}
 				);
 		}
@@ -89,10 +96,9 @@ class TreeView extends UiWindow
 			btn.innerHTML = "-";
 
 			btn.addEventListener("click",
-					function()
-					{
-						this_.documentTree.erase(node);
-						this_.documentTree.rebuild();
+					() => {
+						this.documentTree.erase(node);
+						this.documentTree.rebuild();
 					}
 				);
 		}

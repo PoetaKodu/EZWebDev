@@ -8,15 +8,25 @@ class DocumentTree
 
     insert(tag, parent)
     {
-        let node = new DocumentNode(tag);
-        if (this.root === null) {
-            this.root = node;
-            node.parent = null;   
+        if (!parent || parent.isTagNode())
+        {
+            let node = new DocumentNode(tag);
+            if (this.root === null) {
+                this.root = node;
+                node.parent = null;   
+            }
+            else {
+                node.parent = parent;
+                parent.children.push(node);
+            }
+            return node;
         }
-        else {
-            node.parent = parent;
-            parent.children.push(node);
-        }
+        return null;
+    }
+
+    insertText(parent, text) {
+        let node = this.insert("text", parent);
+        node.text = text;
         return node;
     }
 
@@ -48,12 +58,18 @@ class DocumentTree
 
     rebuildImpl(treeNode, treeElement)
     {
-        let childElement = this.buildElement(treeNode);
-        treeNode.ref = childElement;
-        treeElement.appendChild(childElement);
-        for(let i = 0; i < treeNode.children.length; i++)
+        if (treeNode.isTagNode())
         {
-            this.rebuildImpl(treeNode.children[i], childElement);
+            let childElement = this.buildElement(treeNode);
+            treeNode.ref = childElement;
+            treeElement.appendChild(childElement);
+            for(let i = 0; i < treeNode.children.length; i++)
+            {
+                this.rebuildImpl(treeNode.children[i], childElement);
+            }
+        }
+        else {
+            treeElement.insertAdjacentHTML("beforeend", treeNode.text);
         }
     }
 
@@ -68,6 +84,6 @@ class DocumentTree
             
         }
 
-        return e;
+        return e;         
     }
 }

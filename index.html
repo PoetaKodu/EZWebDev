@@ -8,6 +8,7 @@
 
 	<link rel="stylesheet" href="styles/style.css">
 
+	<script src="js/UtilityFunctions.js"></script>
 	<script src="js/UiWindow.js"></script>
 	<script src="js/ModalWindow.js"></script>
 	<script src="js/PropertyFunctions.js"></script>
@@ -16,16 +17,19 @@
 	<script src="js/DocumentTree.js"></script>
 
 	<script src="js/GlobalConfig.js"></script>
+	<script src="scheme/DocumentElements.js"></script>
 	<script src="scheme/Presets.js"></script>
 	<script src="scheme/TagSchemes.js"></script>
 	
 	<script src="js/TreeView.js"></script>
 	<script src="js/PropertiesWindow.js"></script>
 
+	<script src="js/windows/InsertElementModal.js"></script>
+
 	<script src="js/ez.js"></script>
 </head>
 <body>
-	<div class="ez-container">
+	<div class="ez-root">
 		<div class="ez-window">
 			<header><h1>Drzewo projektu</h1></header>
 			<div id="ezTreeCtx"></div>
@@ -46,10 +50,29 @@
 				</div>
 			</header>
 			<main>
-				<p>Wpisz tag elementu:</p>
-				<input list="tagNames">
+				<p>Wyszukaj:</p>
+				<input list="tagNames" class="ez-search-box">
+
+				<div class="ez-element-cards-ctr">
+					<div class="ez-element-card ez-template">
+						<h1>&lt;span&gt;</h1>
+						<p>Wydzielony kontener dla tekstu</p>
+					</div>
+					<div class="ez-element-card ez-template">
+						<h1>&lt;span&gt;</h1>
+						<p>Wydzielony kontener dla tekstu</p>
+					</div>
+					<div class="ez-element-card ez-template">
+						<h1>&lt;span&gt;</h1>
+						<p>Wydzielony kontener dla tekstu</p>
+					</div>
+					<div class="ez-element-card ez-template">
+						<h1>&lt;span&gt;</h1>
+						<p>Wydzielony kontener dla tekstu</p>
+					</div>
+				</div>
 				
-				<datalist id="tagNames">
+				<!-- <datalist id="tagNames">
 					<option value="p">p (paragraf)</option>
 					<option value="a">a (odnośnik)</option>
 					<option value="h1">h1 (tekst nagłówka 1)</option>
@@ -61,7 +84,7 @@
 					<option value="div">div (pudełko)</option>
 					<option value="span">span (fragment tekstu)</option>
 					<option value="header">header (pudełko nagłówka)</option>
-				</datalist>
+				</datalist> -->
 			</main>
 		</div>
 	</div>
@@ -92,10 +115,19 @@
 		let div 	= ez.documentTree.insert("div");
 		let div2 	= ez.documentTree.insert("div", div);
 		let p 		= ez.documentTree.insert("p", div2);
+		
+		let text	= ez.documentTree.insertText(p, "Jakiś tekst hehehe<br>");
+		let ul		= ez.documentTree.insert("ul", p);
+		for(let i = 0; i < 150; ++i)
+		{
+			let li = ez.documentTree.insert("li", ul);
+			ez.documentTree.insertText(li, "Element listy ddddddddddddddd #" + i);
+		}
+		
+
+		ez.documentTree.insertText(p, "<br>Tekst po liście.");
 
 		ez.documentTree.rebuild();
-
-		p.ref.innerHTML = "Jakis tekst hehehe";
 	</script>
 </body>
 </html>

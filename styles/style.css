@@ -7,6 +7,22 @@ body {
   margin: 0;
   padding: 0;
 }
+.ez-root {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  width: 100%;
+  height: 100%;
+}
+.ez-root-debug {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  width: 100%;
+  height: 100%;
+}
+.ez-root-debug > * {
+  box-sizing: border-box;
+  border: 1px solid black;
+}
 .ez-container {
   width: 100%;
   display: grid;
@@ -89,27 +105,69 @@ body {
   background-color: rgba(255, 255, 255, 0.15);
 }
 #ezInsertElementModalCtx {
-  top: 25%;
-  left: 25%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   height: auto;
   border: 2px solid #00ccff;
+  overflow: visible;
 }
 #ezInsertElementModalCtx > main {
   padding: 5px;
 }
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+  justify-items: center;
+  align-items: center;
+}
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card {
+  cursor: pointer;
+  height: 110px;
+  width: 110px;
+  box-sizing: border-box;
+  background-color: #550ea7;
+  padding: 10px 5px;
+  transition: 0.2s;
+}
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover {
+  background-color: #7925da;
+}
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover > h1 {
+  font-size: 130%;
+}
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1,
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1 {
+  font-family: "Consolas", monospace;
+  font-size: 120%;
+  margin-bottom: 10px;
+  line-height: 100%;
+  transition: 0.2s;
+}
+#ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p {
+  color: #cecece;
+  font-size: 80%;
+}
 #ezInsertElementModalCtx > main > p {
   margin: 5px;
 }
-#ezInsertElementModalCtx > main > input,
-#ezInsertElementModalCtx > main > select {
-  width: 300px;
+#ezInsertElementModalCtx > main > input {
+  margin-bottom: 10px;
+  width: 100%;
   box-sizing: border-box;
   font-family: "Consolas", monospace;
   font-size: 18px;
-  background-color: #f7f7f7;
+  background-color: #ececec;
   padding: 5px;
   border: none;
-  border-bottom: 4px solid #b7b7b7;
+  border-bottom: 4px solid #acacac;
 }
 #ezTreeCtx {
   margin: 5px;
@@ -131,6 +189,16 @@ body {
   font-family: "Consolas", monospace;
   padding-left: 10px;
   transition: 0.2s;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#ezTreeCtx .tree-view-node-ctr > div > p .ez-node-meta {
+  font-size: 80%;
+  color: gray;
+  padding-left: 10px;
 }
 #ezTreeCtx .tree-view-node-ctr > div > div {
   visibility: hidden;
@@ -171,6 +239,16 @@ body {
   font-family: "Consolas", monospace;
   padding-left: 10px;
   transition: 0.2s;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#ezTreeCtx > div > p .ez-node-meta {
+  font-size: 80%;
+  color: gray;
+  padding-left: 10px;
 }
 #ezTreeCtx > div > div {
   visibility: hidden;
@@ -216,6 +294,16 @@ body {
   font-family: "Consolas", monospace;
   padding-left: 10px;
   transition: 0.2s;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#ezTreeCtx ul li > div > p .ez-node-meta {
+  font-size: 80%;
+  color: gray;
+  padding-left: 10px;
 }
 #ezTreeCtx ul li > div > div {
   visibility: hidden;

@@ -47,7 +47,7 @@ class PropertiesWindow extends UiWindow
 
 			for(let j = 0; j < category.properties.length; j++)
 			{
-				this.renderProperty(li, category.properties[j]);
+				this.renderProperty(propsUl, category.properties[j]);
 			}
 		}
 	}
