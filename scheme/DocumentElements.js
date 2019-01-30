@@ -8,16 +8,133 @@ globalConfig.documentElements = [
 	{
 		tag: "p",
 		desc: "Paragraf tekstu.",
-		keywords: [ "paragraph" ]
-	},	
+		keywords: [ "paragraph", "paragraf" ]
+	},
+	{
+		tag: "b",
+		desc: "Pogrubiony tekst.",
+		keywords: [ "bold", "pogrubienie" ]
+	},
+	{
+		tag: "u",
+		desc: "Podkreślony tekst.",
+		keywords: [ "underline", "podkreslenie" ]
+	},
+	{
+		tag: "i",
+		desc: "Pochylony tekst.",
+		keywords: [ "italics", "pochylenie" ]
+	},
+	{
+		tag: "s",
+		desc: "Przekreślony tekst.",
+		keywords: [ "strikethrough", "przekreslenie" ]
+	},
+	{
+		tag: "oblique",
+		desc: "Pochylony tekst.",
+		keywords: [ "italics", "pochylenie" ]
+	},
+	{
+		tag: "ul",
+		desc: "Lista nienumerowana.",
+		keywords: [ "lista", "unordered" ]
+		
+	},
+	{
+		tag: "ol",
+		desc: "Lista numerowana.",
+		keywords: [ "lista", "ordered" ]
+	},
+	{
+		tag: "li",
+		desc: "Element listy.",
+		keywords: [ "list", "element" ]
+		
+	},
+	{
+		tag: "table",
+		desc: "Tabela.",
+		keywords: [ "tabela", "tabelka", "tablica" ]
+	},
+	{
+		tag: "tr",
+		desc: "Wiersz tabeli.",
+		keywords: [ "table", "row", "wiersz" ]
+	},
+	{
+		tag: "th",
+		desc: "Dane komórki nagłówkej tabeli.",
+		keywords: [ "header", "table", "naglowek" ]
+	},
+	{
+		tag: "td",
+		desc: "Dane komórki tabeli.",
+		keywords: [ "table", "data", "dane", "komorka" ]
+	},
+	{
+		tag: "input",
+		desc: "Pole wejściowe.",
+		keywords: [ "pole", "wejście" ]
+	},
+	{
+		tag: "form",
+		desc: "Formularz.",
+		keywords: [ "formularz" ]
+
+	},
+	{
+		tag: "button",
+		desc: "Przycisk.",
+		keywords: [ "przycisk", "btn" ]
+	},
+	{
+		tag: "textarea",
+		desc: "Pole tekstowe."
+	},
+	{
+		tag: "select",
+		desc: "Lista wyboru.",
+		keywords: [ "pole", "wybor" ]
+	},
+	{
+		tag: "option",
+		desc: "Opcja pola select.",
+		keywords: [ "opcja" ]
+		
+	},
 	{
 		tag: "span",
 		desc: "Wydzielony kontener dla tekstu"
-	},	
+	},
 	{
 		tag: "div",
 		desc: "Kontener (pudełko)"
-	},	
+	},
+	{
+		tag: "header",
+		desc: "Kontener nagłówka"
+	},
+	{
+		tag: "aside",
+		desc: "Kontener panelu bocznego"
+	},
+	{
+		tag: "footer",
+		desc: "Kontener stopki"
+	},
+	{
+		tag: "main",
+		desc: "Kontener panelu głównego"
+	},
+	{
+		tag: "section",
+		desc: "Kontener sekcji"
+	},
+	{
+		tag: "article",
+		desc: "Kontener artykułu"
+	},		
 	{
 		tag: "h1",
 		desc: "Nagłówek tekstowy (poziom 1)"

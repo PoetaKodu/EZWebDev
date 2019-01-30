@@ -14,6 +14,7 @@ class PropertiesWindow extends UiWindow
 		this.currentConfig = currentConfig;
 		this.scheme = scheme;
 		this.spawnedEditors = [];
+		this.redrawNeeded = null;
 		// TODO: //this.importValues();
 	}
 
@@ -24,22 +25,24 @@ class PropertiesWindow extends UiWindow
 
 		let ul = document.createElement("ul");
 		ctx.appendChild(ul);
-		for (let i = 0; i < this.scheme.styleProperties.length; i++)
+		
+		for (let i = 0; i < this.currentConfig.length; i++)
 		{
-			let groupName = getStyleGroupName(this.scheme.styleProperties[i].group);
-			let group = categories.find(e => e.name == groupName);
+			let prop = getStyleProperty(this.currentConfig[i].name);
 
+			let groupName = getStyleGroupName(prop.group);
+			let group = categories.find(e => e.name == groupName);
 			if (!group)
 			{
 				group = {};
 				group.name = groupName;
 				group.ref = document.createElement("li");
 				
-				let groupNameNode = document.createElement("h3");
+				let groupNameNode = document.createElement("h1");
 				groupNameNode.innerHTML = groupName;
 				group.ref.appendChild(groupNameNode);
 
-				ctx.appendChild(group.ref);
+				ul.appendChild(group.ref);
 
 				group.childrenList = document.createElement("ul");
 				group.ref.appendChild(group.childrenList);
@@ -47,7 +50,7 @@ class PropertiesWindow extends UiWindow
 				categories.push(group);
 			}
 
-			this.renderProperty(group.childrenList, this.scheme.styleProperties[i]);
+			this.renderProperty(group.childrenList, prop);
 		}
 	}
 
@@ -57,15 +60,18 @@ class PropertiesWindow extends UiWindow
 		ctx.appendChild(propLi);
 
 		let propsNameNode = document.createElement("p");
-		propsNameNode.innerHTML = property.name;
+		propsNameNode.innerHTML = property.name + "<span class=\"ez-prop-style-name\">" + property.styleName + "</span>";
 
 		propLi.appendChild(propsNameNode);
+		this.addControlButtons(propLi, property);
 
 		let editorContainer = document.createElement("div");
 		editorContainer.className += " ez-prop-editor-container";
 		propLi.appendChild(editorContainer);
 		
 		let editor = this.spawnEditor(property);
+		//editor.setValue();
+		
 		editor.onValueChanged = (v) => {
 			let found = false;
 
@@ -86,6 +92,31 @@ class PropertiesWindow extends UiWindow
 		}
 		editor.render(editorContainer);
 		this.spawnedEditors.push(editor);
+	}
+
+	addControlButtons(ctx, property)
+	{
+		let ctrlsCnt = document.createElement("div");
+		ctx.appendChild(ctrlsCnt);
+
+		{
+			let btn = document.createElement("button");
+			ctrlsCnt.appendChild(btn);
+			btn.innerHTML = "-";
+
+			btn.addEventListener("click",
+					() => {
+						let propIndex = this.element.settings.findIndex( e => e.name == property.styleName );
+						if (propIndex != -1) {
+							this.element.settings.splice(propIndex, 1);
+							applyStyle(this.element.ref, this.element.settings);
+
+							if (this.onRedrawNeeded != null)
+								this.onRedrawNeeded();
+						}
+					}
+				);
+		}
 	}
 
 	spawnEditor(prop)

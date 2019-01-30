@@ -113,7 +113,7 @@ body {
 	display: none;
 }
 
-#ezInsertElementModalCtx {
+#ezInsertElementModalCtx, #ezInsertStyleModalCtx {
 	top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -126,7 +126,7 @@ body {
 		>.ez-element-cards-ctr {
 			display: grid;
 			max-height: 300px;
-			overflow-y: auto;
+			overflow-y: scroll;
 			box-sizing: border-box;
 			grid-template-columns: repeat(4, 1fr);
 			grid-gap: 5px;
@@ -276,3 +276,45 @@ body {
 		}
 	}
 }
+
+#ezPropertiesCtx {
+	padding: 5px;
+	
+	>ul, li>ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	>ul {
+		>li {
+			>ul {
+				padding-left: 20px;
+			}
+			margin-top: 10px;
+		}
+	}
+	li {
+		>h1, >p {
+			font-size: 100%;
+			margin: 0;
+			line-height: 100%;
+		}
+		>h1 {
+			font-size: 140%;
+			margin-bottom: 10px;
+		}
+		>p {
+			margin-bottom: 5px;
+			display: flex;
+			align-items: center;
+			.ez-prop-style-name {
+				margin-left: 10px;
+				font-size: 90%;
+				color: rgb(192, 192, 192);
+				font-family: "Consolas", monospace;
+			}
+		}
+
+	}
+}
+

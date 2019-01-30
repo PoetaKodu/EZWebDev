@@ -43,6 +43,46 @@ class EzApp
 				};
 		}
 
+
+		{
+
+			this.insertStyleModal = new InsertStyleModalWindow(this.insertStyleModalCtx);
+			let flags = new ModalWindowFlags();
+			// flags.hideTitle 		= true;
+			// flags.hideCloseBtn 	= true;
+			flags.hideOnFocusLost = true;
+			this.insertStyleModal.setFlags(flags);
+			this.insertStyleModal.setVisible(false);
+			this.insertStyleModal.onAccept = (text) => {
+					console.log("accepted: " + text);
+					if (text != "") {
+						let opt = this.insertStyleModal.editedNode.settings.find(s => s.name == text);
+						console.log("opt: ", opt, ", settings: ", this.insertStyleModal.editedNode.settings);
+						if (!opt) {
+							opt = {};
+							opt.name = text;
+							opt.value = "none";
+
+							this.insertStyleModal.editedNode.settings.push(opt);
+						}
+						this.onSelectTreeElement(this.insertStyleModal.editedNode);
+					}
+					this.insertStyleModal.setVisible(false);
+				};
+
+			let insertStyleBtn = document.getElementById("insertStyleBtn");
+			insertStyleBtn.addEventListener("click",
+					() => {
+						if (this.selectedNode) {
+							console.log("Click ", this.selectedNode);
+							this.insertStyleModal.editedNode = this.selectedNode;
+							this.insertStyleModal.setSearchText("");
+							this.insertStyleModal.setVisible(true);
+						}
+					}
+				);
+		}
+
 		{
 			this.editContentModal = new EditContentModalWindow(this.editContentModalCtx);
 			let flags = new ModalWindowFlags();
@@ -67,17 +107,22 @@ class EzApp
 	onSelectTreeElement(node) {
 
 		if (node) {
+			this.selectedNode = node;
 			this.propertiesWindowCtx.innerHTML = "";
 
-			let defaultScheme = this.getDefaultTagScheme(node.tag);
 			if (node.isTextNode()) {
 				this.editContentModal.setContentText(node.text);
 				this.editContentModal.setVisible(true);
 				this.editContentModal.editedNode = node;
 			}
-			else if (defaultScheme.styleProperties.length > 0) {
-				this.propertiesWindow = new PropertiesWindow(node, node.settings, defaultScheme);
+			else {
+				this.propertiesWindow = new PropertiesWindow(node, node.settings);
 				this.propertiesWindow.render(this.propertiesWindowCtx);
+				this.propertiesWindow.onRedrawNeeded = () => {
+						this.propertiesWindowCtx.innerHTML = "";
+						this.propertiesWindow.currentConfig = node.settings;
+						this.propertiesWindow.render(this.propertiesWindowCtx);
+					};
 			}
 		}
 	}
