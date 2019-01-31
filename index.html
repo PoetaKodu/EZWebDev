@@ -150,24 +150,8 @@
 
 		ez.run();
 
-		// Insert some elements:
+		// Insert root element:
 		let div 	= ez.documentTree.insert("div");
-		let div2 	= ez.documentTree.insert("div", div);
-		let p 		= ez.documentTree.insert("p", div2);
-		p.settings.styles = [
-			{ name: "border-style", value: "dotted" }
-		];
-		
-		let text	= ez.documentTree.insertText(p, "Jakiś tekst hehehe<br>");
-		let ul		= ez.documentTree.insert("ul", p);
-		for(let i = 0; i < 3; ++i)
-		{
-			let li = ez.documentTree.insert("li", ul);
-			ez.documentTree.insertText(li, "Element listy ddddddddddddddd #" + i);
-		}
-		
-
-		ez.documentTree.insertText(p, "<br>Tekst po liście.");
 
 		ez.documentTree.rebuild();
 	</script>
