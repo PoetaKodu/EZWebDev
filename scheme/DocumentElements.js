@@ -11,6 +11,11 @@ globalConfig.documentElements = [
 		keywords: [ "paragraph", "paragraf" ]
 	},
 	{
+		tag: "img",
+		desc: "Obraz.",
+		keywords: [ "obraz", "image", "picture" ]
+	},
+	{
 		tag: "a",
 		desc: "Odnośnik.",
 		keywords: [ "link", "anchor", "odnosnik" ]
@@ -86,7 +91,11 @@ globalConfig.documentElements = [
 		tag: "form",
 		desc: "Formularz.",
 		keywords: [ "formularz" ]
-
+	},
+	{
+		tag: "fieldset",
+		desc: "Zbiór elementów formularza.",
+		keywords: [ "field" ]
 	},
 	{
 		tag: "button",
@@ -106,7 +115,6 @@ globalConfig.documentElements = [
 		tag: "option",
 		desc: "Opcja pola select.",
 		keywords: [ "opcja" ]
-		
 	},
 	{
 		tag: "span",
@@ -117,12 +125,24 @@ globalConfig.documentElements = [
 		desc: "Kontener (pudełko)"
 	},
 	{
+		tag: "figure",
+		desc: "Kontener obrazu / elementu zewnętrznego"
+	},
+	{
+		tag: "figcaption",
+		desc: "Tytuł elementu zewnętrznego."
+	},
+	{
 		tag: "header",
 		desc: "Kontener nagłówka"
 	},
 	{
 		tag: "aside",
 		desc: "Kontener panelu bocznego"
+	},
+	{
+		tag: "nav",
+		desc: "Kontener panelu nawigacyjnego"
 	},
 	{
 		tag: "footer",
@@ -163,5 +183,9 @@ globalConfig.documentElements = [
 	{
 		tag: "h6",
 		desc: "Nagłówek tekstowy (poziom 6)"
+	},
+	{
+		tag: "meta",
+		desc: "Metadane"
 	}
 ];
