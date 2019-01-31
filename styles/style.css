@@ -108,7 +108,8 @@ body {
   display: none;
 }
 #ezInsertElementModalCtx,
-#ezInsertStyleModalCtx {
+#ezInsertStyleModalCtx,
+#ezInsertAttributeModalCtx {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -118,11 +119,13 @@ body {
   overflow: visible;
 }
 #ezInsertElementModalCtx > main,
-#ezInsertStyleModalCtx > main {
+#ezInsertStyleModalCtx > main,
+#ezInsertAttributeModalCtx > main {
   padding: 5px;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr {
   display: grid;
   max-height: 300px;
   overflow-y: scroll;
@@ -133,7 +136,8 @@ body {
   align-items: center;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card {
   cursor: pointer;
   height: 110px;
   width: 110px;
@@ -143,23 +147,28 @@ body {
   transition: 0.2s;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover {
   background-color: #7925da;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover > h1,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover > h1 {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover > h1,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card:hover > h1 {
   font-size: 130%;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1,
 #ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1,
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p {
   text-align: center;
   margin: 0;
   padding: 0;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1 {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card > h1 {
   font-family: "Consolas", monospace;
   font-size: 120%;
   margin-bottom: 10px;
@@ -167,16 +176,19 @@ body {
   transition: 0.2s;
 }
 #ezInsertElementModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p,
-#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p {
+#ezInsertStyleModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p,
+#ezInsertAttributeModalCtx > main > .ez-element-cards-ctr > .ez-element-card > p {
   color: #cecece;
   font-size: 80%;
 }
 #ezInsertElementModalCtx > main > p,
-#ezInsertStyleModalCtx > main > p {
+#ezInsertStyleModalCtx > main > p,
+#ezInsertAttributeModalCtx > main > p {
   margin: 5px;
 }
 #ezInsertElementModalCtx > main > input,
-#ezInsertStyleModalCtx > main > input {
+#ezInsertStyleModalCtx > main > input,
+#ezInsertAttributeModalCtx > main > input {
   margin-bottom: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -368,6 +380,22 @@ body {
 }
 #ezTreeCtx ul li > div:active {
   background-color: rgba(56, 253, 220, 0.2);
+}
+#ezTreeCtx[collapsed="true"] > div,
+#ezTreeCtx li[collapsed="true"] > div {
+  border-bottom: 2px solid green;
+}
+#ezTreeCtx[collapsed="true"] > ul,
+#ezTreeCtx li[collapsed="true"] > ul {
+  display: none;
+}
+#ezTreeCtx[selected="true"] > div,
+#ezTreeCtx li[selected="true"] > div {
+  background-color: #2f0cf7;
+}
+#ezTreeCtx[selected="true"] > div:hover,
+#ezTreeCtx li[selected="true"] > div:hover {
+  background-color: #2f0cf7;
 }
 #ezPropertiesCtx {
   padding: 5px;

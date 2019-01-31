@@ -17,8 +17,9 @@ let EditorType = {
 };
 
 class PropertyEditor {
-	constructor(scheme) {
+	constructor(scheme, defaultValue) {
 		this.scheme = scheme;
+		this.defaultValue = defaultValue;
 		this.onValueChanged = null;
 	}
 	render(ctx) {
@@ -43,7 +44,13 @@ class RawPropertyEditor
 	renderImpl(ctx) {
 		let e = document.createElement("input");
 		e.setAttribute("type", "text");
+		if (this.defaultValue !== undefined)
+			e.value = this.defaultValue;
+
 		e.addEventListener("change", () => this.valueChanged(e.value) );
+		e.addEventListener("keyup", () => this.valueChanged(e.value) );
+		e.addEventListener("keydown", () => this.valueChanged(e.value) );
+
 		return e;
 	}
 }
@@ -63,6 +70,9 @@ class InputNumberPropertyEditor
 	renderImpl(ctx) {
 		let e = document.createElement("input");
 		e.setAttribute("type", "number");
+		if (this.defaultValue !== undefined)
+			e.value = this.defaultValue;
+
 		e.addEventListener("change", () => this.valueChanged(e.valueAsNumber) );
 		return e;
 	}
@@ -80,16 +90,22 @@ class SliderPropertyEditor
 		slider.setAttribute("min", this.scheme.min);
 		slider.setAttribute("max", this.scheme.max);
 		slider.setAttribute("step", this.scheme.step);
+		if (this.defaultValue !== undefined)
+			slider.value = this.defaultValue;
 
 		let valueIndicator = document.createElement("p");
-		slider.addEventListener("change",
-				() => {
-					valueIndicator.innerHTML = slider.value;
-					this.valueChanged(slider.valueAsNumber);
-				}
-			);
 		valueIndicator.className += "ez-slider-value";
+		valueIndicator.innerHTML = slider.value;
 		e.appendChild(valueIndicator);
+
+		let onChange = () => {
+			valueIndicator.innerHTML = slider.value;
+			this.valueChanged(slider.valueAsNumber);
+		};
+
+		slider.addEventListener("change", () => onChange() );
+		slider.addEventListener("mousemove", () => onChange() );
+		
 		return e;
 	}
 }
@@ -107,11 +123,10 @@ class PredefinedPropertyEditor
 			optNode.setAttribute("value", opt.value);
 			e.appendChild(optNode);
 		}
-		e.addEventListener("change",
-				() => {
-					this.valueChanged(e.value);
-				}
-			);
+		if (this.defaultValue !== undefined)
+			e.value = this.defaultValue;
+
+		e.addEventListener("change", () => { this.valueChanged(e.value); } );
 		return e;
 	}
 }

@@ -33,6 +33,12 @@ class TreeView extends UiWindow
 		//		<!-- ... other children -->
 		//	</ul>
 
+		if (node.collapsed)
+			ctx.setAttribute("collapsed", "true");
+
+		if (this.selectedNode == node)
+			ctx.setAttribute("selected", "true");
+
 		// Setup ndRowCtr - the most outer div.
 		let ndRowCtr = document.createElement("div");
 		ctx.appendChild(ndRowCtr);
@@ -78,6 +84,28 @@ class TreeView extends UiWindow
 		let ctrlsCnt = document.createElement("div");
 		treeViewElement.appendChild(ctrlsCnt);
 
+		if (node.children.length > 0)
+		{
+			let btn = document.createElement("button");
+			ctrlsCnt.appendChild(btn);
+			btn.innerHTML = node.collapsed ? "v" : ">";
+
+			btn.addEventListener("click",
+					() => {
+						if (!node.collapsed) {
+							node.collapsed = true;
+							btn.innerHTML = ">";
+							treeViewElement.parentNode.setAttribute("collapsed", "true");
+						}
+						else {
+							node.collapsed = false;
+							btn.innerHTML = "v";
+							treeViewElement.parentNode.removeAttribute("collapsed");
+						}
+					}
+				);
+		}
+
 		if (node.isTagNode())
 		{
 			let btn = document.createElement("button");
@@ -90,6 +118,7 @@ class TreeView extends UiWindow
 					}
 				);
 		}
+
 		{
 			let btn = document.createElement("button");
 			ctrlsCnt.appendChild(btn);

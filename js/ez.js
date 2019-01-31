@@ -21,6 +21,8 @@ class EzApp
 				this.insertElementModal.parentNode = node;
 			};
 
+		document.addEventListener("keyup", (e) => { this.onKeyUp(e); });
+
 		{
 
 			this.insertElementModal = new InsertElementModalWindow(this.insertElementModalCtx);
@@ -46,7 +48,7 @@ class EzApp
 
 		{
 
-			this.insertStyleModal = new InsertStyleModalWindow(this.insertStyleModalCtx);
+			this.insertStyleModal = new InsertPropertyModalWindow(this.insertStyleModalCtx, globalConfig.styleProperties);
 			let flags = new ModalWindowFlags();
 			// flags.hideTitle 		= true;
 			// flags.hideCloseBtn 	= true;
@@ -56,14 +58,14 @@ class EzApp
 			this.insertStyleModal.onAccept = (text) => {
 					console.log("accepted: " + text);
 					if (text != "") {
-						let opt = this.insertStyleModal.editedNode.settings.find(s => s.name == text);
+						let opt = this.insertStyleModal.editedNode.settings.styles.find(s => s.name == text);
 						console.log("opt: ", opt, ", settings: ", this.insertStyleModal.editedNode.settings);
 						if (!opt) {
 							opt = {};
 							opt.name = text;
 							opt.value = "none";
 
-							this.insertStyleModal.editedNode.settings.push(opt);
+							this.insertStyleModal.editedNode.settings.styles.push(opt);
 						}
 						this.onSelectTreeElement(this.insertStyleModal.editedNode);
 					}
@@ -78,6 +80,45 @@ class EzApp
 							this.insertStyleModal.editedNode = this.selectedNode;
 							this.insertStyleModal.setSearchText("");
 							this.insertStyleModal.setVisible(true);
+						}
+					}
+				);
+		}
+
+		{
+
+			this.insertAttributeModal = new InsertPropertyModalWindow(this.insertAttributeModalCtx, globalConfig.attributeProperties);
+			let flags = new ModalWindowFlags();
+			// flags.hideTitle 		= true;
+			// flags.hideCloseBtn 	= true;
+			flags.hideOnFocusLost = true;
+			this.insertAttributeModal.setFlags(flags);
+			this.insertAttributeModal.setVisible(false);
+			this.insertAttributeModal.onAccept = (text) => {
+					console.log("accepted: " + text);
+					if (text != "") {
+						let opt = this.insertAttributeModal.editedNode.settings.attributes.find(s => s.name == text);
+						console.log("opt: ", opt, ", settings: ", this.insertAttributeModal.editedNode.settings);
+						if (!opt) {
+							opt = {};
+							opt.name = text;
+							opt.value = "none";
+
+							this.insertAttributeModal.editedNode.settings.attributes.push(opt);
+						}
+						this.onSelectTreeElement(this.insertAttributeModal.editedNode);
+					}
+					this.insertAttributeModal.setVisible(false);
+				};
+
+			let insertAttributeBtn = document.getElementById("insertAttributeBtn");
+			insertAttributeBtn.addEventListener("click",
+					() => {
+						if (this.selectedNode) {
+							console.log("Click ", this.selectedNode);
+							this.insertAttributeModal.editedNode = this.selectedNode;
+							this.insertAttributeModal.setSearchText("");
+							this.insertAttributeModal.setVisible(true);
 						}
 					}
 				);
@@ -108,6 +149,8 @@ class EzApp
 
 		if (node) {
 			this.selectedNode = node;
+			this.treeView.selectedNode = node;
+
 			this.propertiesWindowCtx.innerHTML = "";
 
 			if (node.isTextNode()) {
@@ -116,6 +159,7 @@ class EzApp
 				this.editContentModal.editedNode = node;
 			}
 			else {
+
 				this.propertiesWindow = new PropertiesWindow(node, node.settings);
 				this.propertiesWindow.render(this.propertiesWindowCtx);
 				this.propertiesWindow.onRedrawNeeded = () => {
@@ -124,7 +168,30 @@ class EzApp
 						this.propertiesWindow.render(this.propertiesWindowCtx);
 					};
 			}
+
+			this.documentTree.rebuild();
 		}
+	}
+
+	onKeyUp(event) {
+
+		if (event.shiftKey && this.selectedNode) {
+			// left
+			if (event.keyCode == 37)
+				this.documentTree.moveOuter(this.selectedNode);
+			// Right arrow
+			else if (event.keyCode == 39)
+				this.documentTree.moveInner(this.selectedNode);
+			// Up arrow
+			else if (event.keyCode == 38)
+				this.documentTree.moveUp(this.selectedNode);
+			// Down arrow
+			else if (event.keyCode == 40)
+				this.documentTree.moveDown(this.selectedNode);
+
+			this.documentTree.rebuild();
+		}
+
 	}
 
 	getDefaultTagScheme(tag) {

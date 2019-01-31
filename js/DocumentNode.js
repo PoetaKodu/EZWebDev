@@ -4,9 +4,13 @@ class DocumentNode
     {
         this.tag = tag;
         this.text = null;
-        this.settings = [];
+        this.settings = {
+            styles: [],
+            attributes: []
+        };
         this.children = [];
         this.ref = null;
+        this.collapsed = false;
     }
 
     isTagNode() {

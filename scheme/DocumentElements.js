@@ -11,6 +11,11 @@ globalConfig.documentElements = [
 		keywords: [ "paragraph", "paragraf" ]
 	},
 	{
+		tag: "a",
+		desc: "Odnośnik.",
+		keywords: [ "link", "anchor", "odnosnik" ]
+	},
+	{
 		tag: "b",
 		desc: "Pogrubiony tekst.",
 		keywords: [ "bold", "pogrubienie" ]

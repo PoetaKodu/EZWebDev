@@ -6,6 +6,70 @@ class DocumentTree
         this.onRebuildNeeded = null;
     }
 
+    reparent(node, newParent) {
+        if (this.root != node) {
+            let p = node.parent;
+            let idx = p.children.findIndex(c => c == node);
+            
+            node.parent.children.splice(idx, 1);
+            newParent.children.push(node);
+            node.parent = newParent;
+        }
+    }
+
+    moveUp(node) {
+        if (node.parent) {
+            let p = node.parent;
+            let idx = p.children.findIndex(c => c == node);
+            if (idx > 0)
+            {
+                let temp = p.children[idx - 1];
+                p.children[idx - 1] = node;
+                p.children[idx] = temp;
+            }
+        }
+    }
+
+    moveDown(node) {
+        if (node.parent) {
+            let p = node.parent;
+            let idx = p.children.findIndex(c => c == node);
+            if (idx + 1 < p.children.length)
+            {
+                let temp = p.children[idx + 1];
+                p.children[idx + 1] = node;
+                p.children[idx] = temp;
+            }
+        }
+    }
+
+    moveInner(node) {
+        if (node.parent)
+        {
+            let p = node.parent;
+            let idx = p.children.findIndex(c => c == node);
+            if (idx > 0 && p.children[idx - 1].isTagNode()) {
+                this.reparent(node, p.children[idx - 1]);
+            }
+        }
+    }
+
+
+    moveOuter(node) {
+        if (node.parent && node.parent.parent)
+        {
+            let prevParent = node.parent;
+            this.reparent(node, node.parent.parent);
+
+            let pIdx = prevParent.parent.children.findIndex(c => c == prevParent);
+            let idx = prevParent.parent.children.findIndex(c => c == node);
+            while (idx != pIdx + 1) {
+                this.moveUp(node);
+                idx = prevParent.parent.children.findIndex(c => c == node);
+            }
+        }
+    }
+
     insert(tag, parent)
     {
         if (!parent || parent.isTagNode())
@@ -32,9 +96,7 @@ class DocumentTree
 
     erase(node)
     {
-        if (this.root == node)
-            this.root = null;
-        else
+        if (this.root != node)
         {
             let parent = node.parent;
             let id = parent.children.findIndex(n => (n == node));
@@ -78,11 +140,6 @@ class DocumentTree
         let e = document.createElement(node.tag);
         e.setAttribute("ez", "");
         
-        let s = node.settings;
-        for(let i = 0; i < s.length; i++)
-        {
-            
-        }
 
         return e;         
     }

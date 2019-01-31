@@ -25,7 +25,7 @@
 	<script src="js/PropertiesWindow.js"></script>
 
 	<script src="js/windows/InsertElementModal.js"></script>
-	<script src="js/windows/InsertStyleModal.js"></script>
+	<script src="js/windows/InsertPropertyModal.js"></script>
 	<script src="js/windows/EditContentModal.js"></script>
 
 	<script src="js/ez.js"></script>
@@ -42,6 +42,7 @@
 		<div class="ez-window">
 			<header><h1>Właściwości</h1></header>
 			<button id="insertStyleBtn">Dodaj styl</button>
+			<button id="insertAttributeBtn">Dodaj atrybut</button>
 			<div id="ezPropertiesCtx"></div>
 		</div>
 	
@@ -85,6 +86,26 @@
 				</div>
 			</main>
 		</div>
+		<div id="ezInsertAttributeModalCtx" class="ez-modal-window">
+			<header>
+				<h1>Dodaj atrybut</h1>
+				<div class="ez-modal-buttons">
+					<button class="ez-modal-close-btn">X</button>
+				</div>
+			</header>
+			<main>
+				<p>Wyszukaj:</p>
+				<input class="ez-search-box">
+
+				<div class="ez-element-card ez-template">
+					<h1>href</h1>
+					<p></p>
+				</div>
+				<div class="ez-element-cards-ctr">
+					
+				</div>
+			</main>
+		</div>
 		<div id="ezEditContentModalCtx" class="ez-modal-window">
 			<header>
 				<h1>Edytuj zawartość</h1>
@@ -108,9 +129,10 @@
 		let ezOutputCtx 		= document.getElementById("ezOutputCtx");
 		
 		// Modals windows:
-		let ezInsertElementModalCtx = document.getElementById("ezInsertElementModalCtx");
-		let ezInsertStyleModalCtx 	= document.getElementById("ezInsertStyleModalCtx");
-		let ezEditContentModalCtx 	= document.getElementById("ezEditContentModalCtx");
+		let ezInsertElementModalCtx 	= document.getElementById("ezInsertElementModalCtx");
+		let ezInsertStyleModalCtx 		= document.getElementById("ezInsertStyleModalCtx");
+		let ezInsertAttributeModalCtx 	= document.getElementById("ezInsertAttributeModalCtx");
+		let ezEditContentModalCtx 		= document.getElementById("ezEditContentModalCtx");
 		
 
 		let ez = new EzApp();
@@ -123,6 +145,7 @@
 		// Setup modal windows:
 		ez.insertElementModalCtx 	= ezInsertElementModalCtx;
 		ez.insertStyleModalCtx 		= ezInsertStyleModalCtx;
+		ez.insertAttributeModalCtx 	= ezInsertAttributeModalCtx;
 		ez.editContentModalCtx 		= ezEditContentModalCtx;
 
 		ez.run();
@@ -131,9 +154,11 @@
 		let div 	= ez.documentTree.insert("div");
 		let div2 	= ez.documentTree.insert("div", div);
 		let p 		= ez.documentTree.insert("p", div2);
-		p.settings = [
-			{ name: "border-style", value: "dotted" }
-		];
+		p.settings = {
+			styles: [
+				{ name: "border-style", value: "dotted" }
+			]
+		};
 		
 		let text	= ez.documentTree.insertText(p, "Jakiś tekst hehehe<br>");
 		let ul		= ez.documentTree.insert("ul", p);
