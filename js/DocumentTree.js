@@ -139,7 +139,8 @@ class DocumentTree
     {
         let e = document.createElement(node.tag);
         e.setAttribute("ez", "");
-        
+        applyStyle(e, node.settings.styles);
+        applyAttributes(e, node.settings.attributes);
 
         return e;         
     }
