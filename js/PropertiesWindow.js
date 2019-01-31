@@ -149,6 +149,7 @@ class PropertiesWindow extends UiWindow
 
 		{
 			let btn = document.createElement("button");
+			btn.setAttribute("class", "ez-ctrl-btn");
 			ctrlsCnt.appendChild(btn);
 			btn.innerHTML = "-";
 

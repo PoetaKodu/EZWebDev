@@ -89,40 +89,43 @@ class TreeView extends UiWindow
 		if (node.children.length > 0)
 		{
 			let btn = document.createElement("button");
+			btn.setAttribute("class", "ez-ctrl-btn");
 			ctrlsCnt.appendChild(btn);
 			btn.innerHTML = node.collapsed ? "v" : ">";
-
+			
 			btn.addEventListener("click",
-					() => {
-						if (!node.collapsed) {
-							node.collapsed = true;
-							btn.innerHTML = ">";
-							treeViewElement.parentNode.setAttribute("collapsed", "true");
-						}
-						else {
-							node.collapsed = false;
-							btn.innerHTML = "v";
-							treeViewElement.parentNode.removeAttribute("collapsed");
-						}
-					}
-				);
+			() => {
+				if (!node.collapsed) {
+					node.collapsed = true;
+					btn.innerHTML = ">";
+					treeViewElement.parentNode.setAttribute("collapsed", "true");
+				}
+				else {
+					node.collapsed = false;
+					btn.innerHTML = "v";
+					treeViewElement.parentNode.removeAttribute("collapsed");
+				}
+			}
+			);
 		}
-
+		
 		if (node.isTagNode())
 		{
 			let btn = document.createElement("button");
+			btn.setAttribute("class", "ez-ctrl-btn");
 			ctrlsCnt.appendChild(btn);
 			btn.innerHTML = "+";
 			btn.addEventListener("click",
-					() => {
-						if(this.onWantsToInsertNewTreeElement)
-							this.onWantsToInsertNewTreeElement(node);
-					}
-				);
+			() => {
+				if(this.onWantsToInsertNewTreeElement)
+				this.onWantsToInsertNewTreeElement(node);
+			}
+			);
 		}
-
+		
 		{
 			let btn = document.createElement("button");
+			btn.setAttribute("class", "ez-ctrl-btn");
 			ctrlsCnt.appendChild(btn);
 			btn.innerHTML = "-";
 
