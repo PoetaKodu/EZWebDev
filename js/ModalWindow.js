@@ -19,9 +19,15 @@ class ModalWindow
 	setVisible(visible_)
 	{
 		this.ctx.style.display = visible_ ? "" : "none";
+
+		if (visible_)
+			this.lastShown = Date.now(); 
 	}
 
 	isVisible() {
+		if (!!this.ctx && this.ctx.style.display == "none")
+			return false;
+
 		return !!this.ctx &&
 		!!( this.ctx.offsetWidth ||
 			this.ctx.offsetHeight ||
@@ -67,12 +73,16 @@ class ModalWindow
 
 	registerOutsideClickHandler() {
 		const handler = event => {
-			if (!this.ctx.contains(event.target)) {
-				if (this.isVisible()) {
-					this.setVisible(false);
-					removeHandler();
+			if (this.lastShown === undefined || Date.now() - this.lastShown > 150)
+			{
+				if (!this.ctx.contains(event.target)) {
+					if (this.isVisible()) {
+						this.setVisible(false);
+						removeHandler();
+					}
 				}
 			}
+			
 		}
 		const removeHandler = () => {
 			document.removeEventListener("click", handler);

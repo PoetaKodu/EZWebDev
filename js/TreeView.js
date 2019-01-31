@@ -38,6 +38,8 @@ class TreeView extends UiWindow
 
 		if (this.selectedNode == node)
 			ctx.setAttribute("selected", "true");
+		else
+			ctx.removeAttribute("selected");
 
 		// Setup ndRowCtr - the most outer div.
 		let ndRowCtr = document.createElement("div");

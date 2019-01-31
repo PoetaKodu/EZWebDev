@@ -154,11 +154,9 @@
 		let div 	= ez.documentTree.insert("div");
 		let div2 	= ez.documentTree.insert("div", div);
 		let p 		= ez.documentTree.insert("p", div2);
-		p.settings = {
-			styles: [
-				{ name: "border-style", value: "dotted" }
-			]
-		};
+		p.settings.styles = [
+			{ name: "border-style", value: "dotted" }
+		];
 		
 		let text	= ez.documentTree.insertText(p, "Jakiś tekst hehehe<br>");
 		let ul		= ez.documentTree.insert("ul", p);
