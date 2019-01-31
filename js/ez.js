@@ -56,10 +56,8 @@ class EzApp
 			this.insertStyleModal.setFlags(flags);
 			this.insertStyleModal.setVisible(false);
 			this.insertStyleModal.onAccept = (text) => {
-					console.log("accepted: " + text);
 					if (text != "") {
 						let opt = this.insertStyleModal.editedNode.settings.styles.find(s => s.name == text);
-						console.log("opt: ", opt, ", settings: ", this.insertStyleModal.editedNode.settings);
 						if (!opt) {
 							opt = {};
 							opt.name = text;
@@ -76,7 +74,6 @@ class EzApp
 			insertStyleBtn.addEventListener("click",
 					() => {
 						if (this.selectedNode) {
-							console.log("Click ", this.selectedNode);
 							this.insertStyleModal.editedNode = this.selectedNode;
 							this.insertStyleModal.setSearchText("");
 							this.insertStyleModal.setVisible(true);
@@ -95,10 +92,8 @@ class EzApp
 			this.insertAttributeModal.setFlags(flags);
 			this.insertAttributeModal.setVisible(false);
 			this.insertAttributeModal.onAccept = (text) => {
-					console.log("accepted: " + text);
 					if (text != "") {
 						let opt = this.insertAttributeModal.editedNode.settings.attributes.find(s => s.name == text);
-						console.log("opt: ", opt, ", settings: ", this.insertAttributeModal.editedNode.settings);
 						if (!opt) {
 							opt = {};
 							opt.name = text;
@@ -115,7 +110,6 @@ class EzApp
 			insertAttributeBtn.addEventListener("click",
 					() => {
 						if (this.selectedNode) {
-							console.log("Click ", this.selectedNode);
 							this.insertAttributeModal.editedNode = this.selectedNode;
 							this.insertAttributeModal.setSearchText("");
 							this.insertAttributeModal.setVisible(true);
