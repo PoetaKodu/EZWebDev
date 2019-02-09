@@ -1176,6 +1176,17 @@ globalConfig.styleProperties = [
 		codeName: "width",
 		type: EditorType.Text
 	},
+	{
+		name: "box-sizing",
+		group: "dimension",
+		codeName: "box-sizing",
+		type: EditorType.List,
+		options: [
+			{ name: "content-box", value: "content-box" },
+			{ name: "border-box", value: "border-box" },
+			{ name: "padding-box", value: "padding-box" }
+		]
+	},
 
 	// Font:
 	{
